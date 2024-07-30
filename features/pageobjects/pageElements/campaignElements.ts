@@ -4,9 +4,9 @@ const pageComponents = {
   cookiesAcceptButton: '//*[@id="onetrust-accept-btn-handler"]',
 };
 
-export const campaginSelectors = {
+export const campaignSelectors = {
   pageComponents,
-  campaginComponents: {
+  campaignElements: {
     "ModelIntro-1": '//*[@data-autoid="ModelIntro-1"]',
     "LocalSubmenu-1": '//*[@data-autoid="LocalSubmenu-1"]',
     "ModelIntro-2": '//*[@data-autoid="ModelIntro-2"]',
@@ -20,4 +20,6 @@ export const campaginSelectors = {
     "MediaHighlights-1": '//*[@data-autoid="MediaHighlights-1"]',
     "Disclaimer-1": '//*[@data-autoid="Disclaimer-1"]',
   },
+  LocalSubmenuLinks: '//*[@data-autoid="LocalSubmenu-1"]//a',
+  FirstLocalSubmenuLink: '//*[@data-autoid="LocalSubmenu-1"]//a[1]',
 };

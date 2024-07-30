@@ -1,6 +1,6 @@
 import { $ } from "@wdio/globals";
 import Page from "../page.ts";
-import { campaginSelectors } from "../pageElements/campaginElements.ts";
+import { campaignSelectors } from "../pageElements/campaignElements.ts";
 
 class CampaignPage extends Page {
   public get btnAcceptCookies() {
@@ -10,13 +10,18 @@ class CampaignPage extends Page {
     await this.btnAcceptCookies.click();
   }
   public get getHeader() {
-    return $(campaginSelectors.pageComponents.header);
+    return $(campaignSelectors.pageComponents.header);
   }
   public get getFooter() {
-    return $(campaginSelectors.pageComponents.footer);
+    return $(campaignSelectors.pageComponents.footer);
   }
-  getElementByDataAutoid(id: string) {
-    return $(campaginSelectors.campaginComponents[id]);
+  getElementByDataAutoid(id: any) {
+    return $(campaignSelectors.campaignElements[id]);
+  }
+  async isFirstLinkActive() {
+    const element = await $(campaignSelectors.FirstLocalSubmenuLink);
+    const attr = await element.getAttribute("data-active");
+    return attr === "true";
   }
   public open() {
     return super.open("highlights");

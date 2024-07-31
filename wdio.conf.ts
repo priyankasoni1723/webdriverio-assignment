@@ -134,9 +134,14 @@ export const config: Options.Testrunner = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
-    // "json",
-    // ["allure", { outputDir: "allure-results" }],
-    // "cucumberjs-json",
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+      },
+    ],
   ],
 
   // If you are using Cucumber you need to specify the location of your step definitions.

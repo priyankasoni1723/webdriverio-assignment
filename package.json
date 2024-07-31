@@ -14,6 +14,11 @@
     "wdio-cucumberjs-json-reporter": "^5.2.1"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts",
+    "allure:report": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.29.0"
   }
 }

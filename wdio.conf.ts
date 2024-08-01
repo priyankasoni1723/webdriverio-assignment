@@ -59,17 +59,11 @@ export const config: Options.Testrunner = {
   capabilities: [
     {
       browserName: "chrome",
-      // "goog:chromeOptions": {
-      //   args: [
-      //     "--no-sandbox",
-      //     "--disable-infobars",
-      //     "--headless",
-      //     "--disable-gpu",
-      //     "--window-size=1440,735",
-      //   ],
-      // },
     },
   ],
+  hostname: "localhost", // Selenium Hub hostname
+  port: 4444, // Selenium Hub port
+  path: "/wd/hub",
 
   //
   // ===================
@@ -156,7 +150,7 @@ export const config: Options.Testrunner = {
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
     // <string[]> (file/dir) require files before executing features
-    require: ["./features/step-definitions/campaignStep.ts"],
+    require: ["./features/step-definitions/*.ts", "./features/hooks.ts"],
     // <boolean> show full backtrace for errors
     backtrace: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

@@ -16,7 +16,8 @@
   "scripts": {
     "wdio": "wdio run ./wdio.conf.ts",
     "allure:report": "allure generate allure-results --clean -o allure-report",
-    "allure:open": "allure open allure-report"
+    "allure:open": "allure open allure-report",
+    "build-docker-image": "docker compose up"
   },
   "dependencies": {
     "allure-commandline": "^2.29.0",

@@ -3,7 +3,7 @@ import { expect } from "@wdio/globals";
 
 import CampaignPage from "../pageobjects/pageActions/campaign.page.ts";
 import {
-  campaignSelectors,
+  productCarouselSelectors,
   sliderWithIconsSelectors,
 } from "../pageobjects/pageElements/campaignElements.ts";
 
@@ -20,11 +20,7 @@ Then(/^the header is present$/, async () => {
 });
 
 Then(/^the page components are present$/, async () => {
-  const components = Object.keys(campaignSelectors.campaignElements);
-
-  for (const component of components) {
-    await expect(CampaignPage.getElementByDataAutoid(component)).toBeExisting();
-  }
+  await CampaignPage.validateCampaignElements();
 });
 
 Then(/^the footer is present$/, async () => {
@@ -32,13 +28,7 @@ Then(/^the footer is present$/, async () => {
 });
 
 Then(/^the page introduction should be visible$/, async () => {
-  const modelIntroElement = await $(
-    campaignSelectors.campaignElements["ModelIntro-1"]
-  );
-  await expect(modelIntroElement).toBeExisting();
-
-  const safetyHeading = await modelIntroElement.$("//h1[contains(.,'Safety')]");
-  await expect(safetyHeading).toBeExisting();
+  await CampaignPage.validateCampaignPageHeader();
 });
 
 Then(
@@ -49,10 +39,7 @@ Then(
 );
 
 Then(/^all links in the localSubMenu should be visible$/, async () => {
-  const links = await $$(campaignSelectors.LocalSubmenuLinks);
-  for (const link of links) {
-    await expect(link).toBeDisplayed();
-  }
+  await CampaignPage.validateLocalSubMenu();
 });
 
 Then(
@@ -92,7 +79,6 @@ Then(
 );
 
 Then(/^the previous slide should be enabled and clickable$/, async () => {
-  console.log("the previous slide 1");
   await CampaignPage.isPreviousSlideEnabledAndClickable();
 });
 
@@ -112,7 +98,6 @@ When(/^clicking on the previous slide$/, async () => {
   await CampaignPage.clickOnPreviousSlide();
 });
 Then(/^verify heading description and image$/, async () => {
-  //use
   await CampaignPage.isCarouselElementsAreVisible(
     sliderWithIconsSelectors.card1
   );
@@ -136,3 +121,59 @@ Then(/^verify heading description and image for third slider$/, async () => {
     sliderWithIconsSelectors.card3
   );
 });
+
+// Product Carousel
+
+Then(/^the ProductListCarousel header should be visible$/, async () => {
+  await CampaignPage.isProductCarouselHeaderDisplayed();
+});
+
+Then(/^the ProductListCarousel should contain cards$/, async () => {
+  await CampaignPage.isProductCarouselCardsPresent();
+});
+
+Then(/^the fisrt 4 ProductListCarousel card should be visible$/, async () => {
+  await CampaignPage.isFourProductCarouselCardsVisible();
+});
+
+Then(
+  /^verify the cars details with title, description, image and links$/,
+  async () => {
+    await CampaignPage.validateProductCarouselElements();
+  }
+);
+
+Then(
+  /^the ProductListCarousel next button should be enabled and previous button disabled$/,
+  async () => {
+    await CampaignPage.validateProductCarouselNavigationButton();
+  }
+);
+
+When(/^click the next button$/, async () => {
+  await (await $(productCarouselSelectors.springCarouselNextButton)).click();
+});
+
+Then(
+  /^the next card details should be visible with title, description, image and links$/,
+  async () => {
+    await CampaignPage.isFourProductCarouselCardsVisible();
+  }
+);
+Then(/^click on next button until you reach at the end$/, async () => {
+  await CampaignPage.validateProductCarouselNextButton();
+});
+Then(/^click on previous button until you reach at the start$/, async () => {
+  await CampaignPage.validateProductCarouselPreviousButton();
+});
+
+Then(/^the MediaHighlights header should be visible$/, async () => {
+  await CampaignPage.isMediaHighlightsHeaderDisplayed();
+});
+
+Then(
+  /^verify the MediaHighlights with title, description and image$/,
+  async () => {
+    await CampaignPage.validateMediaHighlightsCards();
+  }
+);

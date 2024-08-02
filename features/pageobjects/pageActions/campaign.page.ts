@@ -28,22 +28,25 @@ class CampaignPage extends Page {
     const attr = await element.getAttribute("data-active");
     return attr === "true";
   }
-  public open() {
+  public openBrowser() {
     return super.open("highlights");
   }
+  public closeBroswer() {
+    return super.close();
+  }
   public async isfirstSlideWithIconsTitleDisplayed() {
-    return await $(sliderWithIconsSelectors.title1).isDisplayed();
+    return await (await $(sliderWithIconsSelectors.title1)).isDisplayed();
   }
   public async isSecondSlideWithIconsTitleDisplayed() {
-    return await $(sliderWithIconsSelectors.title2).isDisplayed();
+    return await (await $(sliderWithIconsSelectors.title2)).isDisplayed();
   }
   public async isThirdSlideWithIconsTitleDisplayed() {
-    return await $(sliderWithIconsSelectors.title3).isDisplayed();
+    return await (await $(sliderWithIconsSelectors.title3)).isDisplayed();
   }
   public async isfirstSliderWithIconsActive() {
-    const attr = await $(sliderWithIconsSelectors.title1).getAttribute(
-      "aria-selected"
-    );
+    const attr = await (
+      await $(sliderWithIconsSelectors.title1)
+    ).getAttribute("aria-selected");
     return attr === "true";
   }
   public async isSecondSliderWithIconsActive() {
@@ -60,48 +63,48 @@ class CampaignPage extends Page {
   }
 
   public async isSecondAndThirdSliderWithIconsInactive() {
-    const attr2 = await $(sliderWithIconsSelectors.title2).getAttribute(
-      "aria-selected"
-    );
-    const attr3 = await $(sliderWithIconsSelectors.title3).getAttribute(
-      "aria-selected"
-    );
+    const attr2 = await (
+      await $(sliderWithIconsSelectors.title2)
+    ).getAttribute("aria-selected");
+    const attr3 = await (
+      await $(sliderWithIconsSelectors.title3)
+    ).getAttribute("aria-selected");
     return attr2 === "false" && attr3 === "false";
   }
   public async isFirstAndThirdSliderWithIconsInactive() {
-    const attr2 = await $(sliderWithIconsSelectors.title1).getAttribute(
-      "aria-selected"
-    );
-    const attr3 = await $(sliderWithIconsSelectors.title3).getAttribute(
-      "aria-selected"
-    );
+    const attr2 = await (
+      await $(sliderWithIconsSelectors.title1)
+    ).getAttribute("aria-selected");
+    const attr3 = await (
+      await $(sliderWithIconsSelectors.title3)
+    ).getAttribute("aria-selected");
     return attr2 === "false" && attr3 === "false";
   }
   public async isFirstAndSecondSliderWithIconsInactive() {
-    const attr2 = await $(sliderWithIconsSelectors.title1).getAttribute(
-      "aria-selected"
-    );
-    const attr3 = await $(sliderWithIconsSelectors.title2).getAttribute(
-      "aria-selected"
-    );
+    const attr2 = await (
+      await $(sliderWithIconsSelectors.title1)
+    ).getAttribute("aria-selected");
+    const attr3 = await (
+      await $(sliderWithIconsSelectors.title2)
+    ).getAttribute("aria-selected");
     return attr2 === "false" && attr3 === "false";
   }
 
   public async isNextSlideEnabledAndClickable() {
-    const isEnabled = await $(
-      sliderWithIconsSelectors.springCarouselNextButton
+    const isEnabled = await (
+      await $(sliderWithIconsSelectors.springCarouselNextButton)
     ).isEnabled();
-    const isClickable = await $(
-      sliderWithIconsSelectors.springCarouselNextButton
+    const isClickable = await (
+      await $(sliderWithIconsSelectors.springCarouselNextButton)
     ).isClickable();
     return isEnabled && isClickable;
   }
   public async isPreviousSlideEnabledAndClickable() {
-    const isEnabled = await $(
-      sliderWithIconsSelectors.springCarouselPreviousButton
+    const isEnabled = await (
+      await $(sliderWithIconsSelectors.springCarouselPreviousButton)
     ).isEnabled();
-    const isClickable = await $(
-      sliderWithIconsSelectors.springCarouselPreviousButton
+    const isClickable = await (
+      await $(sliderWithIconsSelectors.springCarouselPreviousButton)
     ).isClickable();
     return isEnabled && isClickable;
   }
@@ -112,17 +115,19 @@ class CampaignPage extends Page {
     nextButton.click();
   }
   public async clickOnPreviousSlide() {
-    await $(sliderWithIconsSelectors.springCarouselPreviousButton).click();
+    await (
+      await $(sliderWithIconsSelectors.springCarouselPreviousButton)
+    ).click();
   }
   public async isPreviousSlideDisabled() {
-    const attr = await $(
-      sliderWithIconsSelectors.springCarouselPreviousButton
+    const attr = await (
+      await $(sliderWithIconsSelectors.springCarouselPreviousButton)
     ).getAttribute("aria-selected");
     return attr === "false";
   }
   public async isNextSlideDisabled() {
-    const attr = await $(
-      sliderWithIconsSelectors.springCarouselNextButton
+    const attr = await (
+      await $(sliderWithIconsSelectors.springCarouselNextButton)
     ).getAttribute("aria-selected");
     return attr === "false";
   }
@@ -277,6 +282,18 @@ class CampaignPage extends Page {
     for (const link of links) {
       await expect(link).toBeDisplayed();
     }
+  }
+
+  async clickOnSpringCarouselNextButton() {
+    const nextButton = await $(
+      productCarouselSelectors.springCarouselNextButton
+    );
+    await nextButton.click();
+  }
+
+  async scrollToSection(id: string) {
+    const section = await $(id);
+    await section.scrollIntoView();
   }
 }
 

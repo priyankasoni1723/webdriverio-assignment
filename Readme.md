@@ -65,10 +65,10 @@ To run tests, run the following command
 
 ## Demo
 
-![Selenium Grid]()
-![Selenium Grid]()
-![Allure Report]()
-![Spec Report]()
+![Selenium Grid](https://github.com/user-attachments/assets/90e6a488-5121-45d0-b989-787a20116291)
+![Selenium Grid session](https://github.com/user-attachments/assets/a8dbde7c-4bc6-48ab-9f28-85b4dce2cf00)
+<img width="1705" alt="image" src="https://github.com/user-attachments/assets/82711a5b-1a0b-4a0d-9ecb-c0c50007c0ce">
+![image](https://github.com/user-attachments/assets/a7bd9458-b326-4bce-a982-657b2d209094)
 
 ## Features
 

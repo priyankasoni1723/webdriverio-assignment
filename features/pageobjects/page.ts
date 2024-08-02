@@ -12,4 +12,7 @@ export default class Page {
   public open(path: string) {
     return browser.url(`https://www.volvocars.com/intl/v/safety/${path}`);
   }
+  public close() {
+    return browser.deleteSession();
+  }
 }

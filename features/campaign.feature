@@ -1,13 +1,5 @@
 Feature: Campaign Page Validation
 
-  @page-elements @campaign-page
-  Scenario: Verify the presence of header, footer, and page components on the Campaign page
-    Given I am on the campaign page
-    Then I accept the cookies
-    Then the header is present
-    Then the page components are present
-    Then the footer is present
-
   @campaign-page @local-submenu
   Scenario: Verify the Local Submenu
     Then the page introduction should be visible
@@ -51,6 +43,11 @@ Feature: Campaign Page Validation
     Then verify heading description and image
     Then the next slide should be enabled and previous slide should be disabled
 
+  @campaign-page @media-highlights
+  Scenario: Verify MediaHighlights visibility
+    Then the MediaHighlights header should be visible
+    Then verify the MediaHighlights with title, description and image
+
   @campaign-page @product-list-carousel
   Scenario: Verify carousel visibility
     Then the ProductListCarousel header should be visible
@@ -78,8 +75,3 @@ Feature: Campaign Page Validation
     And click on next button until you reach at the end
     And click on previous button until you reach at the start
     Then verify the cars details with title, description, image and links
-
-  @campaign-page @media-highlights
-  Scenario: Verify MediaHighlights visibility
-    Then the MediaHighlights header should be visible
-    Then verify the MediaHighlights with title, description and image

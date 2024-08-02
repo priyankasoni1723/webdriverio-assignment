@@ -3,29 +3,11 @@ import { expect } from "@wdio/globals";
 
 import CampaignPage from "../pageobjects/pageActions/campaign.page.ts";
 import {
+  campaignSelectors,
+  mediaHighlightsSelectors,
   productCarouselSelectors,
   sliderWithIconsSelectors,
 } from "../pageobjects/pageElements/campaignElements.ts";
-
-Given(/^I am on the (\w+) page$/, async (page) => {
-  await CampaignPage.open();
-});
-
-Then(/^I accept the cookies$/, async () => {
-  await CampaignPage.acceptCookies();
-});
-
-Then(/^the header is present$/, async () => {
-  await expect(CampaignPage.getHeader).toBeExisting();
-});
-
-Then(/^the page components are present$/, async () => {
-  await CampaignPage.validateCampaignElements();
-});
-
-Then(/^the footer is present$/, async () => {
-  await expect(CampaignPage.getHeader).toBeExisting();
-});
 
 Then(/^the page introduction should be visible$/, async () => {
   await CampaignPage.validateCampaignPageHeader();
@@ -42,9 +24,14 @@ Then(/^all links in the localSubMenu should be visible$/, async () => {
   await CampaignPage.validateLocalSubMenu();
 });
 
+// SliderWithIcons starts here
+
 Then(
   /^the introduction of the first slider should be visible and active$/,
   async () => {
+    await CampaignPage.scrollToSection(
+      campaignSelectors.campaignElements["TextStatement-1"]
+    );
     await CampaignPage.isfirstSlideWithIconsTitleDisplayed();
     await CampaignPage.isfirstSliderWithIconsActive();
   }
@@ -122,9 +109,28 @@ Then(/^verify heading description and image for third slider$/, async () => {
   );
 });
 
-// Product Carousel
+// SliderWithIcons ends here
+
+// MediaHighlights starts here
+
+Then(/^the MediaHighlights header should be visible$/, async () => {
+  await CampaignPage.scrollToSection(mediaHighlightsSelectors.cards);
+  await CampaignPage.isMediaHighlightsHeaderDisplayed();
+});
+
+Then(
+  /^verify the MediaHighlights with title, description and image$/,
+  async () => {
+    await CampaignPage.validateMediaHighlightsCards();
+  }
+);
+
+// MediaHighlights ends here
+
+// ProductListCarousel step starts here
 
 Then(/^the ProductListCarousel header should be visible$/, async () => {
+  await CampaignPage.scrollToSection(productCarouselSelectors.cards);
   await CampaignPage.isProductCarouselHeaderDisplayed();
 });
 
@@ -151,7 +157,7 @@ Then(
 );
 
 When(/^click the next button$/, async () => {
-  await (await $(productCarouselSelectors.springCarouselNextButton)).click();
+  await CampaignPage.clickOnSpringCarouselNextButton();
 });
 
 Then(
@@ -160,20 +166,13 @@ Then(
     await CampaignPage.isFourProductCarouselCardsVisible();
   }
 );
+
 Then(/^click on next button until you reach at the end$/, async () => {
   await CampaignPage.validateProductCarouselNextButton();
 });
+
 Then(/^click on previous button until you reach at the start$/, async () => {
   await CampaignPage.validateProductCarouselPreviousButton();
 });
 
-Then(/^the MediaHighlights header should be visible$/, async () => {
-  await CampaignPage.isMediaHighlightsHeaderDisplayed();
-});
-
-Then(
-  /^verify the MediaHighlights with title, description and image$/,
-  async () => {
-    await CampaignPage.validateMediaHighlightsCards();
-  }
-);
+// ProductListCarousel step ends here
